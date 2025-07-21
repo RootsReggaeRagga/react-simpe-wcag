@@ -95,6 +95,24 @@ const WcagToggle = () => {
     }
   }, [textSize]);
 
+  // Close panel when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const wcagContainer = document.querySelector('.wcag-container');
+      if (isVisible && wcagContainer && !wcagContainer.contains(event.target)) {
+        setIsVisible(false);
+      }
+    };
+
+    if (isVisible) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isVisible]);
+
   return (
     <>
       <div className={`wcag-container ${isVisible ? 'show' : ''}`}>
