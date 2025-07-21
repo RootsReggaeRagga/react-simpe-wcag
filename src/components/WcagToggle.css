@@ -9,6 +9,31 @@
   display: none !important;
 }
 
+.wcag-btt__reset {
+  background-color: #dc3545 !important; /* Red color to indicate reset action */
+  border: 2px solid #dc3545 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+.wcag-btt__reset:hover {
+  background-color: #c82333 !important; /* Darker red on hover */
+  border-color: #c82333 !important;
+}
+
+body.wcag__contrast .wcag-btt__reset {
+  background-color: #dc3545 !important;
+  color: #fff !important;
+  border-color: #dc3545 !important;
+}
+
+body.wcag__contrast .wcag-btt__reset:hover {
+  background-color: #c82333 !important;
+  border-color: #c82333 !important;
+}
+
 /* Link button styles */
 .wcag-btt__link {
   background-color: #28a745 !important; /* Green color for links */
@@ -30,6 +55,39 @@ body.wcag__contrast .wcag-btt__link {
 body.wcag__contrast .wcag-btt__link:hover {
   background-color: #218838 !important;
   border-color: #218838 !important;
+}
+
+/* Reset notification styles */
+.wcag-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #28a745;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1002;
+  font-size: 14px;
+  font-weight: 500;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+body.wcag__contrast .wcag-notification {
+  background-color: #28a745;
+  color: white;
+  border: 2px solid #28a745;
 }
 
 body {

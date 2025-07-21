@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './WcagToggle.css'; // Import the CSS file
-import { Accessibility } from 'lucide-react';
+import { Accessibility, RotateCcw } from 'lucide-react';
 
 const WcagToggle = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [textSize, setTextSize] = useState('normal'); // Single state for text size
+  const [showResetNotification, setShowResetNotification] = useState(false);
 
   const toggleVisibility = () => {
     setIsVisible(prev => !prev);
@@ -32,6 +33,10 @@ const WcagToggle = () => {
     return "";
   };
 
+  const deleteCookie = (cname) => {
+    document.cookie = `${cname}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  };
+
   const handleTextChange = (size) => {
     setTextSize(size);
     setCookie('wcagTextSize', size, 1);
@@ -41,6 +46,32 @@ const WcagToggle = () => {
     document.body.classList.toggle('wcag__contrast');
     const contrastCookie = getCookie('wcagContrast') === '1' ? '0' : '1';
     setCookie('wcagContrast', contrastCookie, 1);
+  };
+
+  const handleResetSettings = () => {
+    // Reset text size to normal
+    setTextSize('normal');
+    
+    // Remove contrast class from body
+    document.body.classList.remove('wcag__contrast');
+    
+    // Remove all WCAG classes from body
+    document.body.classList.remove('wcag__text-normal', 'wcag__text-plus', 'wcag__text-plus-plus');
+    
+    // Add normal text class
+    document.body.classList.add('wcag__text-normal');
+    
+    // Delete all WCAG cookies
+    deleteCookie('wcagTextSize');
+    deleteCookie('wcagContrast');
+    
+    // Show notification
+    setShowResetNotification(true);
+    
+    // Hide notification after 3 seconds
+    setTimeout(() => {
+      setShowResetNotification(false);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -65,39 +96,52 @@ const WcagToggle = () => {
   }, [textSize]);
 
   return (
-    <div className={`wcag-container ${isVisible ? 'show' : ''}`}>
-      <div className="wcag-btt">
-        <button 
-          className="aside-wcag__toggle" 
-          onClick={toggleVisibility} 
-          aria-expanded={isVisible}>
-            <Accessibility />
-        </button>
-        <div className="wcag-options">
-          <button className="wcag-btt__text-normal" onClick={() => handleTextChange('normal')}>
-            Text
+    <>
+      <div className={`wcag-container ${isVisible ? 'show' : ''}`}>
+        <div className="wcag-btt">
+          <button 
+            className="aside-wcag__toggle" 
+            onClick={toggleVisibility} 
+            aria-expanded={isVisible}>
+              <Accessibility />
           </button>
-          <button className="wcag-btt__text-plus" onClick={() => handleTextChange('plus')}>
-            Text+
-          </button>
-          <button className="wcag-btt__text-plus-plus" onClick={() => handleTextChange('plus-plus')}>
-            Text++
-          </button>
-          <button className="wcag-btt__wcag-hi" onClick={handleContrastToggle}>
-            High Contrast
-          </button>
-          <button className="wcag-btt__wcag-lo" onClick={handleContrastToggle}>
-            Low Contrast
-          </button>
-          <button className="wcag-btt__link" onClick={() => { /* Add your link logic here */ }}>
-            Accessibility declaration
-          </button>
-          <button className="wcag-btt__link" onClick={() => { /* Add your link logic here */ }}>
-            Sitemap
-          </button>
+          <div className="wcag-options">
+            <button className="wcag-btt__text-normal" onClick={() => handleTextChange('normal')}>
+              Text
+            </button>
+            <button className="wcag-btt__text-plus" onClick={() => handleTextChange('plus')}>
+              Text+
+            </button>
+            <button className="wcag-btt__text-plus-plus" onClick={() => handleTextChange('plus-plus')}>
+              Text++
+            </button>
+            <button className="wcag-btt__wcag-hi" onClick={handleContrastToggle}>
+              High Contrast
+            </button>
+            <button className="wcag-btt__wcag-lo" onClick={handleContrastToggle}>
+              Low Contrast
+            </button>
+            <button className="wcag-btt__reset" onClick={handleResetSettings}>
+              <RotateCcw size={16} />
+              Reset Settings
+            </button>
+            <button className="wcag-btt__link" onClick={() => { /* Add your link logic here */ }}>
+              Accessibility declaration
+            </button>
+            <button className="wcag-btt__link" onClick={() => { /* Add your link logic here */ }}>
+              Sitemap
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+      
+      {/* Reset notification */}
+      {showResetNotification && (
+        <div className="wcag-notification">
+          Settings have been reset to default
+        </div>
+      )}
+    </>
   );
 };
 
