@@ -34,6 +34,50 @@ body.wcag__contrast .wcag-btt__reset:hover {
   border-color: #c82333 !important;
 }
 
+/* Toggle button styles */
+.wcag-btt__toggle {
+  background-color: #6c757d !important; /* Gray color for toggles */
+  border: 2px solid #6c757d !important;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+.wcag-btt__toggle:hover {
+  background-color: #5a6268 !important; /* Darker gray on hover */
+  border-color: #5a6268 !important;
+}
+
+.wcag-btt__toggle.wcag-btt__active {
+  background-color: #ffc107 !important; /* Yellow when active */
+  border-color: #ffc107 !important;
+  color: #000 !important;
+}
+
+.wcag-btt__toggle.wcag-btt__active:hover {
+  background-color: #e0a800 !important;
+  border-color: #e0a800 !important;
+}
+
+body.wcag__contrast .wcag-btt__toggle {
+  background-color: #6c757d !important;
+  color: #fff !important;
+  border-color: #6c757d !important;
+}
+
+body.wcag__contrast .wcag-btt__toggle:hover {
+  background-color: #5a6268 !important;
+  border-color: #5a6268 !important;
+}
+
+body.wcag__contrast .wcag-btt__toggle.wcag-btt__active {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+  border-color: #ffc107 !important;
+}
+
 /* Link button styles */
 .wcag-btt__link {
   background-color: #28a745 !important; /* Green color for links */

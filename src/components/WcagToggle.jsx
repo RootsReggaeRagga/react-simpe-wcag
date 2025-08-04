@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './WcagToggle.css'; // Import the CSS file
-import { Accessibility, RotateCcw } from 'lucide-react';
+import { Accessibility, RotateCcw, Code, Image } from 'lucide-react';
 
 const WcagToggle = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [textSize, setTextSize] = useState('normal'); // Single state for text size
   const [showResetNotification, setShowResetNotification] = useState(false);
+  const [scriptsDisabled, setScriptsDisabled] = useState(false);
+  const [imagesDisabled, setImagesDisabled] = useState(false);
 
   const toggleVisibility = () => {
     setIsVisible(prev => !prev);
@@ -48,6 +50,54 @@ const WcagToggle = () => {
     setCookie('wcagContrast', contrastCookie, 1);
   };
 
+  const handleScriptsToggle = () => {
+    const newState = !scriptsDisabled;
+    setScriptsDisabled(newState);
+    setCookie('wcagScriptsDisabled', newState ? '1' : '0', 1);
+    
+    if (newState) {
+      document.body.classList.add('wcag__no-scripts');
+      // Disable all scripts except WCAG widget
+      const scripts = document.querySelectorAll('script:not([src*="wcag"])');
+      scripts.forEach(script => {
+        script.setAttribute('data-wcag-disabled', 'true');
+        script.style.display = 'none';
+      });
+    } else {
+      document.body.classList.remove('wcag__no-scripts');
+      // Re-enable scripts
+      const scripts = document.querySelectorAll('script[data-wcag-disabled="true"]');
+      scripts.forEach(script => {
+        script.removeAttribute('data-wcag-disabled');
+        script.style.display = '';
+      });
+    }
+  };
+
+  const handleImagesToggle = () => {
+    const newState = !imagesDisabled;
+    setImagesDisabled(newState);
+    setCookie('wcagImagesDisabled', newState ? '1' : '0', 1);
+    
+    if (newState) {
+      document.body.classList.add('wcag__no-images');
+      // Hide all images and videos
+      const mediaElements = document.querySelectorAll('img, video, iframe, canvas, svg:not(.wcag-container svg)');
+      mediaElements.forEach(element => {
+        element.setAttribute('data-wcag-hidden', 'true');
+        element.style.display = 'none';
+      });
+    } else {
+      document.body.classList.remove('wcag__no-images');
+      // Show images and videos
+      const mediaElements = document.querySelectorAll('[data-wcag-hidden="true"]');
+      mediaElements.forEach(element => {
+        element.removeAttribute('data-wcag-hidden');
+        element.style.display = '';
+      });
+    }
+  };
+
   const handleResetSettings = () => {
     // Reset text size to normal
     setTextSize('normal');
@@ -56,14 +106,34 @@ const WcagToggle = () => {
     document.body.classList.remove('wcag__contrast');
     
     // Remove all WCAG classes from body
-    document.body.classList.remove('wcag__text-normal', 'wcag__text-plus', 'wcag__text-plus-plus');
+    document.body.classList.remove('wcag__text-normal', 'wcag__text-plus', 'wcag__text-plus-plus', 'wcag__no-scripts', 'wcag__no-images');
     
     // Add normal text class
     document.body.classList.add('wcag__text-normal');
     
+    // Reset new states
+    setScriptsDisabled(false);
+    setImagesDisabled(false);
+    
+    // Re-enable scripts
+    const scripts = document.querySelectorAll('script[data-wcag-disabled="true"]');
+    scripts.forEach(script => {
+      script.removeAttribute('data-wcag-disabled');
+      script.style.display = '';
+    });
+    
+    // Show images and videos
+    const mediaElements = document.querySelectorAll('[data-wcag-hidden="true"]');
+    mediaElements.forEach(element => {
+      element.removeAttribute('data-wcag-hidden');
+      element.style.display = '';
+    });
+    
     // Delete all WCAG cookies
     deleteCookie('wcagTextSize');
     deleteCookie('wcagContrast');
+    deleteCookie('wcagScriptsDisabled');
+    deleteCookie('wcagImagesDisabled');
     
     // Show notification
     setShowResetNotification(true);
@@ -81,6 +151,32 @@ const WcagToggle = () => {
     }
     if (getCookie('wcagContrast') === '1') {
       document.body.classList.add('wcag__contrast');
+    }
+    
+    // Load saved script and image settings
+    const savedScriptsDisabled = getCookie('wcagScriptsDisabled') === '1';
+    const savedImagesDisabled = getCookie('wcagImagesDisabled') === '1';
+    
+    if (savedScriptsDisabled) {
+      setScriptsDisabled(true);
+      document.body.classList.add('wcag__no-scripts');
+      // Disable scripts on load
+      const scripts = document.querySelectorAll('script:not([src*="wcag"])');
+      scripts.forEach(script => {
+        script.setAttribute('data-wcag-disabled', 'true');
+        script.style.display = 'none';
+      });
+    }
+    
+    if (savedImagesDisabled) {
+      setImagesDisabled(true);
+      document.body.classList.add('wcag__no-images');
+      // Hide images on load
+      const mediaElements = document.querySelectorAll('img, video, iframe, canvas, svg:not(.wcag-container svg)');
+      mediaElements.forEach(element => {
+        element.setAttribute('data-wcag-hidden', 'true');
+        element.style.display = 'none';
+      });
     }
   }, []);
 
@@ -138,6 +234,20 @@ const WcagToggle = () => {
             </button>
             <button className="wcag-btt__wcag-lo" onClick={handleContrastToggle}>
               Low Contrast
+            </button>
+            <button 
+              className={`wcag-btt__toggle ${scriptsDisabled ? 'wcag-btt__active' : ''}`} 
+              onClick={handleScriptsToggle}
+            >
+              <Code size={16} />
+              {scriptsDisabled ? 'Enable Scripts' : 'Disable Scripts'}
+            </button>
+            <button 
+              className={`wcag-btt__toggle ${imagesDisabled ? 'wcag-btt__active' : ''}`} 
+              onClick={handleImagesToggle}
+            >
+              <Image size={16} />
+              {imagesDisabled ? 'Show Media' : 'Hide Media'}
             </button>
             <button className="wcag-btt__reset" onClick={handleResetSettings}>
               <RotateCcw size={16} />

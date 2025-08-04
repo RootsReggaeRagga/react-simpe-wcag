@@ -16,7 +16,7 @@ try {
 
 // 2. Read build files
 const buildDir = path.join(__dirname, 'build');
-const pluginDir = path.join(__dirname, 'react-simple-wcag-wordpress-v2');
+const pluginDir = path.join(__dirname, 'react-simple-wcag-wordpress');
 
 // Find the main JS file
 const jsDir = path.join(buildDir, 'static', 'js');
@@ -95,12 +95,12 @@ try {
 // 5. Create new ZIP file
 console.log('📦 Creating new ZIP file...');
 try {
-    const zipName = 'react-simple-wcag-wordpress-v2.zip';
+    const zipName = 'react-simple-wcag-wordpress.zip';
     if (fs.existsSync(zipName)) {
         fs.unlinkSync(zipName);
     }
     
-    execSync(`zip -r ${zipName} react-simple-wcag-wordpress-v2/`, { stdio: 'inherit' });
+    execSync(`zip -r ${zipName} react-simple-wcag-wordpress/`, { stdio: 'inherit' });
     
     // Get file size
     const stats = fs.statSync(zipName);
@@ -116,4 +116,4 @@ console.log('🎉 Plugin build completed successfully!');
 console.log('📁 Files updated:');
 console.log(`   - ${mainJsFile}`);
 console.log(`   - ${mainCssFile}`);
-console.log(`   - react-simple-wcag-wordpress-v2.zip`); 
+console.log(`   - react-simple-wcag-wordpress.zip`); 
