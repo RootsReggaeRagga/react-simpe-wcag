@@ -1,13 +1,13 @@
-# React Simple WCAG Accessibility Widget for WordPress
+# React Simple WCAG Accessibility Widget for WordPress v2.0
 
-Plugin WordPress dodający widget dostępności zgodny z wytycznymi WCAG 2.1. Widget umożliwia użytkownikom dostosowanie rozmiaru tekstu, kontrastu oraz innych ustawień dostępności.
+Plugin WordPress dodający widget dostępności zgodny z wytycznymi WCAG 2.1. **Nowa wersja używa builda React zamiast przepisywania na vanilla JS.**
 
 ## Funkcjonalności
 
 - **Kontrola rozmiaru tekstu**: Normalny, Duży (Text+), Bardzo duży (Text++)
 - **Przełącznik kontrastu**: Wysoki kontrast (czarne tło, żółty tekst)
 - **Reset ustawień**: Przywracanie domyślnych ustawień
-- **Zapisywanie preferencji**: Ustawienia zapisywane w ciasteczkach i bazie danych WordPress
+- **Zapisywanie preferencji**: Ustawienia zapisywane w ciasteczkach
 - **Responsywny design**: Działa na urządzeniach mobilnych
 - **Zgodność z WCAG**: Spełnia wytyczne dostępności
 
@@ -39,15 +39,17 @@ Po aktywacji pluginu, widget dostępności pojawi się w lewym górnym rogu stro
 ## Struktura plików
 
 ```
-react-simple-wcag-wordpress/
-├── react-simple-wcag-wordpress.php    # Główny plik pluginu
-├── assets/
-│   ├── js/
-│   │   └── wcag-widget.js             # Komponent React
-│   └── css/
-│       └── wcag-widget.css            # Style CSS
-├── languages/                         # Pliki tłumaczeń
-└── README.md                          # Ten plik
+react-simple-wcag-wordpress-v2/
+├── react-simple-wcag-wordpress-v2.php    # Główny plik pluginu
+├── build/                                # React build
+│   └── static/
+│       ├── css/
+│       │   └── main.17b314e4.css         # Style CSS
+│       └── js/
+│           ├── main.a303f56b.js          # Główny plik JS
+│           └── 453.ed3810f9.chunk.js     # Chunk JS
+├── languages/                            # Pliki tłumaczeń
+└── README.md                             # Ten plik
 ```
 
 ## Wymagania
@@ -73,6 +75,13 @@ GPL v2 lub nowsza
 Twój Nazwa - [Twój Email]
 
 ## Changelog
+
+### 2.0.0
+
+- **Nowa architektura**: Używa builda React zamiast vanilla JS
+- **Lepsza wydajność**: Zoptymalizowany kod React
+- **Łatwiejsze utrzymanie**: Oryginalny kod React bez przepisywania
+- **Lepsza kompatybilność**: Mniej konfliktów z motywami
 
 ### 1.0.0
 
