@@ -1,6 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import './WcagToggle.css'; // Import the CSS file
-import { Accessibility, RotateCcw, Code, Image } from 'lucide-react';
+import { 
+  Accessibility, 
+  RotateCcw, 
+  Code, 
+  Image, 
+  Type, 
+  Text, 
+  Heading1, 
+  Contrast, 
+  Eye, 
+  EyeOff, 
+  FileText,
+  Map,
+  Settings
+} from 'lucide-react';
 
 const WcagToggle = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -221,18 +235,23 @@ const WcagToggle = () => {
           </button>
           <div className="wcag-options">
             <button className="wcag-btt__text-normal" onClick={() => handleTextChange('normal')}>
+              <Type size={16} />
               Text
             </button>
             <button className="wcag-btt__text-plus" onClick={() => handleTextChange('plus')}>
+              <Text size={16} />
               Text+
             </button>
             <button className="wcag-btt__text-plus-plus" onClick={() => handleTextChange('plus-plus')}>
+              <Heading1 size={16} />
               Text++
             </button>
             <button className="wcag-btt__wcag-hi" onClick={handleContrastToggle}>
+              <Contrast size={16} />
               High Contrast
             </button>
             <button className="wcag-btt__wcag-lo" onClick={handleContrastToggle}>
+              <Contrast size={16} />
               Low Contrast
             </button>
             <button 
@@ -246,7 +265,7 @@ const WcagToggle = () => {
               className={`wcag-btt__toggle ${imagesDisabled ? 'wcag-btt__active' : ''}`} 
               onClick={handleImagesToggle}
             >
-              <Image size={16} />
+              {imagesDisabled ? <Eye size={16} /> : <EyeOff size={20} />}
               {imagesDisabled ? 'Show Media' : 'Hide Media'}
             </button>
             <button className="wcag-btt__reset" onClick={handleResetSettings}>
@@ -254,18 +273,20 @@ const WcagToggle = () => {
               Reset Settings
             </button>
             <button className="wcag-btt__link" onClick={() => { /* Add your link logic here */ }}>
+              <FileText size={16} />
               Accessibility declaration
             </button>
             <button className="wcag-btt__link" onClick={() => { /* Add your link logic here */ }}>
+              <Map size={16} />
               Sitemap
             </button>
           </div>
         </div>
       </div>
-      
       {/* Reset notification */}
       {showResetNotification && (
         <div className="wcag-notification">
+          <Settings size={16} style={{ marginRight: '8px' }} />
           Settings have been reset to default
         </div>
       )}

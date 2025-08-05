@@ -2,7 +2,7 @@
 /** WCAG */
 
 .wcag-btt__wcag-hi {
-  display: block !important;
+  display: flex !important;
 }
 
 .wcag-btt__wcag-lo {
@@ -14,8 +14,8 @@
   border: 2px solid #dc3545 !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
 }
 
 .wcag-btt__reset:hover {
@@ -41,8 +41,8 @@ body.wcag__contrast .wcag-btt__reset:hover {
   font-weight: 500 !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
 }
 
 .wcag-btt__toggle:hover {
@@ -83,6 +83,10 @@ body.wcag__contrast .wcag-btt__toggle.wcag-btt__active {
   background-color: #28a745 !important; /* Green color for links */
   border: 2px solid #28a745 !important;
   font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
 }
 
 .wcag-btt__link:hover {
@@ -101,6 +105,41 @@ body.wcag__contrast .wcag-btt__link:hover {
   border-color: #218838 !important;
 }
 
+/* Text size button styles */
+.wcag-btt__text-normal,
+.wcag-btt__text-plus,
+.wcag-btt__text-plus-plus {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+}
+
+/* Icon wrapper - większe przestrzenie */
+.wcag-options button svg {
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0 !important;
+  min-width: 20px !important;
+  padding: 5px !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 4px !important;
+  margin-right: 4px !important;
+}
+
+/* Text wrapping */
+.wcag-options button {
+  text-align: left !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
+  line-height: 1.2 !important;
+  padding: 4px 8px !important;
+  display:flex;
+  align-items: center;
+  border-radius: 6px;
+  gap:12px;
+}
+
 /* Reset notification styles */
 .wcag-notification {
   position: fixed;
@@ -115,6 +154,9 @@ body.wcag__contrast .wcag-btt__link:hover {
   font-size: 14px;
   font-weight: 500;
   animation: slideIn 0.3s ease-out;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
 }
 
 @keyframes slideIn {
@@ -193,29 +235,30 @@ body.wcag__contrast .wcag-btt__wcag-hi {
 }
 
 body.wcag__contrast .wcag-btt__wcag-lo {
-  display: block !important;
+  display: flex !important;
 }
 
 
 .wcag-container {
     position: fixed; /* Fixed position for the entire widget */
-    left: -200px; /* Start off-screen */
-    width:200px;
+    left: -250px; /* Start off-screen */
+    width:250px;
     top: 40px; /* Position from the top */
     transition: transform 0.3s ease; /* Smooth transition */
     z-index: 1000; /* Ensure it appears above other content */
   }
   
   .wcag-container.show {
-    transform: translateX(200px); /* Slide into view */
+    transform: translateX(249px); /* Slide into view */
   }
   .wcag-container.show .aside-wcag__toggle{
-    transform: translateX(100px); /* Slide into view */
+    transform: translateX(125px); /* Slide into view */
   }
   .wcag-btt {
     background-color: #fff; /* Light background color */
     border:2px solid #0056b3;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    border-radius:0 0 6px;
   }
   
   .aside-wcag__toggle {
@@ -227,11 +270,12 @@ body.wcag__contrast .wcag-btt__wcag-lo {
     cursor: pointer; /* Pointer cursor on hover */
     z-index: 1001; /* Ensure it appears above the panel */
     position:fixed;
-    transform: translateX(100px) translateY(0);
+    transform: translateX(125px) translateY(0);
     height:50px;
     width:50px;
     margin-top:-2px;
     margin-left:-2px;
+    border-radius: 0 6px 6px 0;
   }
   
   .aside-wcag__toggle:hover {
@@ -248,20 +292,21 @@ body.wcag__contrast .wcag-btt__wcag-lo {
   }
   
   .wcag-options button ,  .wcag-options a {
-    display: block; /* Stack buttons vertically */
+    display: flex; /* Stack buttons vertically */
     width: 100%; /* Full width */
-    padding: 2px; /* Padding for buttons */
     background-color: #007bff; /* Button color */
     color: white; /* Text color */
     border: none; /* No border */
     border-radius: 0px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
     height:50px;
-    width:180px;
+    width:100%;
     margin:9.5px 0;
     font-size:14px;
     line-height:1.1;
     text-decoration: none;
+    border-radius: 6px;
+    align-items: center;
   }
   
   .wcag-options button:hover {
