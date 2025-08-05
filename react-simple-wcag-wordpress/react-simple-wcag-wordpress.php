@@ -40,7 +40,7 @@ class ReactSimpleWCAG {
         wp_enqueue_script('react-simple-wcag-chunk', RSW_PLUGIN_URL . 'build/static/js/453.ed3810f9.chunk.js', array('react-simple-wcag-main'), RSW_PLUGIN_VERSION, true);
         
         // Enqueue CSS from React build
-        wp_enqueue_style('react-simple-wcag', RSW_PLUGIN_URL . 'build/static/css/main.51f1af5f.css', array(), RSW_PLUGIN_VERSION);
+        wp_enqueue_style('react-simple-wcag', RSW_PLUGIN_URL . 'build/static/css/main.5ce0e6d0.css', array(), RSW_PLUGIN_VERSION);
         
         // Add inline script to initialize the widget
         wp_add_inline_script('react-simple-wcag-main', '
