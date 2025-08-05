@@ -17,6 +17,9 @@
   justify-content: flex-start !important;
   gap: 6px !important;
   color:#fff!important;
+  width:100%!important;
+  height:40px!important;
+  flex-direction: row!important;
 }
 
 .wcag-btt__reset:hover {
@@ -74,7 +77,6 @@ body.wcag__contrast .wcag-btt__toggle.wcag-btt__active {
 /* Link button styles */
 .wcag-btt__link {
 
-  font-weight: 700 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
@@ -90,13 +92,19 @@ body.wcag__contrast .wcag-btt__link {
   background-color: #28a745 !important;
   color: #fff !important;
   border-color: #28a745 !important;
+  font-weight:700;
 }
 
 body.wcag__contrast .wcag-btt__link:hover {
   background-color: #218838 !important;
   border-color: #218838 !important;
 }
-
+body.wcag__contrast
+.wcag-btt__text-normal,
+body.wcag__contrast .wcag-btt__text-plus,
+body.wcag__contrast .wcag-btt__text-plus-plus, body.wcag__contrast .wcag-btt__wcag-lo {
+  border-color: #ffc107 !important;
+}
 /* Text size button styles */
 .wcag-btt__text-normal,
 .wcag-btt__text-plus,
@@ -125,7 +133,7 @@ body.wcag__contrast .wcag-btt__link:hover {
   word-wrap: break-word !important;
   white-space: normal !important;
   line-height: 1.2 !important;
-  padding: 4px 8px !important;
+  padding: 6px !important;
   display:flex;
   align-items: center;
   border-radius: 6px;
@@ -280,7 +288,10 @@ body.wcag__contrast .wcag-btt__wcag-lo {
     max-width: 100%;
   }
   .wcag-options {
-    margin:0 7.5px;
+    margin:6px;
+    display:flex;
+    flex-wrap: wrap;
+    gap:6px;
   }
   
   .wcag-options button ,  .wcag-options a {
@@ -290,15 +301,15 @@ body.wcag__contrast .wcag-btt__wcag-lo {
     color: #007bff; /* Text color */
     border: 2px solid #007bff;
     cursor: pointer; /* Pointer cursor on hover */
-    height:50px;
-    width:100%;
-    margin:9.5px 0;
-    font-size:14px;
+    flex: 1 1 calc(50% - 12px);
+    font-size:10px;
     line-height:1.1;
     text-decoration: none;
     border-radius: 6px;
     align-items: center;
-    font-weight:700;
+    font-weight:500;
+    justify-content: flex-start;
+    flex-direction: row;
   }
   
   .wcag-options button:hover {
