@@ -268,10 +268,6 @@ const WcagToggle = () => {
               {imagesDisabled ? <Eye size={16} /> : <EyeOff size={20} />}
               {imagesDisabled ? 'Show Media' : 'Hide Media'}
             </button>
-            <button className="wcag-btt__reset" onClick={handleResetSettings}>
-              <RotateCcw size={16} />
-              Reset Settings
-            </button>
             <button className="wcag-btt__link" onClick={() => { /* Add your link logic here */ }}>
               <FileText size={16} />
               Accessibility declaration
@@ -279,6 +275,10 @@ const WcagToggle = () => {
             <button className="wcag-btt__link" onClick={() => { /* Add your link logic here */ }}>
               <Map size={16} />
               Sitemap
+            </button>
+            <button className="wcag-btt__reset" onClick={handleResetSettings}>
+              <RotateCcw size={16} />
+              Reset Settings
             </button>
           </div>
         </div>

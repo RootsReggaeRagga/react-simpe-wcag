@@ -15,7 +15,8 @@
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 12px !important;
+  gap: 6px !important;
+  color:#fff!important;
 }
 
 .wcag-btt__reset:hover {
@@ -35,15 +36,7 @@ body.wcag__contrast .wcag-btt__reset:hover {
 }
 
 /* Toggle button styles */
-.wcag-btt__toggle {
-  background-color: #6c757d !important; /* Gray color for toggles */
-  border: 2px solid #6c757d !important;
-  font-weight: 500 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 12px !important;
-}
+
 
 .wcag-btt__toggle:hover {
   background-color: #5a6268 !important; /* Darker gray on hover */
@@ -80,13 +73,12 @@ body.wcag__contrast .wcag-btt__toggle.wcag-btt__active {
 
 /* Link button styles */
 .wcag-btt__link {
-  background-color: #28a745 !important; /* Green color for links */
-  border: 2px solid #28a745 !important;
-  font-weight: 500 !important;
+
+  font-weight: 700 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 12px !important;
+  gap: 6px !important;
 }
 
 .wcag-btt__link:hover {
@@ -112,7 +104,7 @@ body.wcag__contrast .wcag-btt__link:hover {
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 12px !important;
+  gap:6px !important;
 }
 
 /* Icon wrapper - większe przestrzenie */
@@ -122,7 +114,7 @@ body.wcag__contrast .wcag-btt__link:hover {
   flex-shrink: 0 !important;
   min-width: 20px !important;
   padding: 5px !important;
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(0, 0, 0, 0.05) !important;
   border-radius: 4px !important;
   margin-right: 4px !important;
 }
@@ -137,7 +129,7 @@ body.wcag__contrast .wcag-btt__link:hover {
   display:flex;
   align-items: center;
   border-radius: 6px;
-  gap:12px;
+  gap:6px;
 }
 
 /* Reset notification styles */
@@ -256,16 +248,16 @@ body.wcag__contrast .wcag-btt__wcag-lo {
   }
   .wcag-btt {
     background-color: #fff; /* Light background color */
-    border:2px solid #0056b3;
+    border:2px solid #007bff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
     border-radius:0 0 6px;
   }
   
   .aside-wcag__toggle {
     background-color: #fff; /* Button color */
-    border: 2px solid #0056b3;
+    border: 2px solid #007bff;
     border-left:0px solid transparent;
-    color: #0056b3; /* Text color */
+    color: #007bff; /* Text color */
     padding: 2px; /* Padding for the button */
     cursor: pointer; /* Pointer cursor on hover */
     z-index: 1001; /* Ensure it appears above the panel */
@@ -294,10 +286,9 @@ body.wcag__contrast .wcag-btt__wcag-lo {
   .wcag-options button ,  .wcag-options a {
     display: flex; /* Stack buttons vertically */
     width: 100%; /* Full width */
-    background-color: #007bff; /* Button color */
-    color: white; /* Text color */
-    border: none; /* No border */
-    border-radius: 0px; /* Rounded corners */
+    background-color: #fff; /* Button color */
+    color: #007bff; /* Text color */
+    border: 2px solid #007bff;
     cursor: pointer; /* Pointer cursor on hover */
     height:50px;
     width:100%;
@@ -307,10 +298,12 @@ body.wcag__contrast .wcag-btt__wcag-lo {
     text-decoration: none;
     border-radius: 6px;
     align-items: center;
+    font-weight:700;
   }
   
   .wcag-options button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #007bff; /* Darker shade on hover */
+    color:#fff;
   }
   .wcag-options button img{
     height:auto;
