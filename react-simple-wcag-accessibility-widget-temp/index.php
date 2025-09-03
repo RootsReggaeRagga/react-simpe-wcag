@@ -3,7 +3,7 @@
  * Plugin Name: React Simple WCAG Accessibility Widget
  * Plugin URI: https://github.com/your-username/react-simple-wcag
  * Description: A WordPress plugin that adds WCAG accessibility features using React build.
- * Version: 2.0.0
+ * Version: 2.0.1
  * Author: Your Name
  * License: GPL v2 or later
  * Text Domain: react-simple-wcag
@@ -36,11 +36,11 @@ class ReactSimpleWCAG {
     
     public function enqueue_scripts() {
         // Enqueue React build files
-        wp_enqueue_script('react-simple-wcag-main', RSW_PLUGIN_URL . 'build/static/js/main.e35ba306.js', array(), RSW_PLUGIN_VERSION, true);
-        wp_enqueue_script('react-simple-wcag-chunk', RSW_PLUGIN_URL . 'build/static/js/453.ed3810f9.chunk.js', array('react-simple-wcag-main'), RSW_PLUGIN_VERSION, true);
+        wp_enqueue_script('react-simple-wcag-main', RSW_PLUGIN_URL . 'build/static/js/main.fc71147b.js', array(), RSW_PLUGIN_VERSION, true);
+        wp_enqueue_script('react-simple-wcag-chunk', RSW_PLUGIN_URL . 'build/static/js/453.96453769.chunk.js', array('react-simple-wcag-main'), RSW_PLUGIN_VERSION, true);
         
         // Enqueue CSS from React build
-        wp_enqueue_style('react-simple-wcag', RSW_PLUGIN_URL . 'build/static/css/main.e1a652fb.css', array(), RSW_PLUGIN_VERSION);
+        wp_enqueue_style('react-simple-wcag', RSW_PLUGIN_URL . 'build/static/css/main.70655ece.css', array(), RSW_PLUGIN_VERSION);
         
         // Add inline script to initialize the widget
         wp_add_inline_script('react-simple-wcag-main', '
@@ -183,8 +183,8 @@ class ReactSimpleWCAG {
 // Initialize the plugin
 new ReactSimpleWCAG();
 
-// Activation hook
-register_activation_hook(__FILE__, 'react_simple_wcag_activate');
+// Activation hook - temporarily disabled
+// register_activation_hook(__FILE__, 'react_simple_wcag_activate');
 
 function react_simple_wcag_activate() {
     // Set default options

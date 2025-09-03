@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const os = require('os');
 
 console.log('🚀 Building React app for WordPress plugin...');
 
@@ -16,7 +17,7 @@ try {
 
 // 2. Read build files
 const buildDir = path.join(__dirname, 'build');
-const pluginDir = path.join(__dirname, 'react-simple-wcag-wordpress');
+const pluginDir = path.join(__dirname, 'wcag-widget');
 
 // Find the main JS file
 const jsDir = path.join(buildDir, 'static', 'js');
@@ -52,8 +53,13 @@ try {
         fs.rmSync(path.join(pluginDir, 'build'), { recursive: true });
     }
     
-    // Copy new build
-    execSync(`cp -r ${buildDir} ${pluginDir}/`, { stdio: 'inherit' });
+    // Copy new build - cross-platform
+    const isWindows = os.platform() === 'win32';
+    if (isWindows) {
+        execSync(`xcopy "${buildDir}" "${path.join(pluginDir, 'build')}" /E /I /H /Y`, { stdio: 'inherit' });
+    } else {
+        execSync(`cp -r ${buildDir} ${pluginDir}/`, { stdio: 'inherit' });
+    }
     console.log('✅ Build files copied');
 } catch (error) {
     console.error('❌ Failed to copy build files:', error.message);
@@ -62,7 +68,7 @@ try {
 
 // 4. Update PHP file with new file names
 console.log('🔧 Updating PHP file with new file names...');
-const phpFile = path.join(pluginDir, 'react-simple-wcag-wordpress.php');
+const phpFile = path.join(pluginDir, 'index.php');
 
 try {
     let phpContent = fs.readFileSync(phpFile, 'utf8');
@@ -79,6 +85,14 @@ try {
         `build/static/css/${mainCssFile}`
     );
     
+    // Update chunk JS file name
+    if (chunkJsFile) {
+        phpContent = phpContent.replace(
+            /build\/static\/js\/453\.[a-zA-Z0-9]+\.chunk\.js/g,
+            `build/static/js/${chunkJsFile}`
+        );
+    }
+    
     // Update root element ID in CSS styles
     phpContent = phpContent.replace(
         /#root/g,
@@ -87,6 +101,8 @@ try {
     
     fs.writeFileSync(phpFile, phpContent);
     console.log('✅ PHP file updated');
+    
+
 } catch (error) {
     console.error('❌ Failed to update PHP file:', error.message);
     process.exit(1);
@@ -95,12 +111,19 @@ try {
 // 5. Create new ZIP file
 console.log('📦 Creating new ZIP file...');
 try {
-    const zipName = 'react-simple-wcag-wordpress.zip';
+    const zipName = 'wcag-widget.zip';
     if (fs.existsSync(zipName)) {
         fs.unlinkSync(zipName);
     }
     
-    execSync(`zip -r ${zipName} react-simple-wcag-wordpress/`, { stdio: 'inherit' });
+    // Create ZIP - cross-platform
+    const isWindows = os.platform() === 'win32';
+    if (isWindows) {
+        // Use PowerShell Compress-Archive for Windows
+        execSync(`powershell -Command "Compress-Archive -Path 'wcag-widget' -DestinationPath '${zipName}' -Force"`, { stdio: 'inherit' });
+    } else {
+        execSync(`zip -r ${zipName} wcag-widget/`, { stdio: 'inherit' });
+    }
     
     // Get file size
     const stats = fs.statSync(zipName);
@@ -116,4 +139,4 @@ console.log('🎉 Plugin build completed successfully!');
 console.log('📁 Files updated:');
 console.log(`   - ${mainJsFile}`);
 console.log(`   - ${mainCssFile}`);
-console.log(`   - react-simple-wcag-wordpress.zip`); 
+console.log(`   - react-simple-wcag-accessibility-widget.zip`); 
